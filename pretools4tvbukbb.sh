@@ -25,13 +25,13 @@ cd $preHSAM/control_dti_untar
 for i in $dir_rawdti
 do
     tar -C . -xzf $preHSAM/control_raw_dti/${i}.tar.gz
-    mv raw $i
+    mv $preHSAM/control_dti_untar/raw $preHSAM/control_dti_untar/$i
 done
 
 ### 2. convert .PAR .REC files to nii file using `dcm2niix` tool for DTI data
 
 # create a folder to storge the niigz files
-mkdir control_dti_niigz
+mkdir $preHSAM/control_dti_niigz
 for i in $dir_rawdti
 do
 	cp $preHSAM/control_dti_untar/$i/*.PAR.gz $preHSAM/control_dti_niigz/$i
@@ -46,7 +46,7 @@ done
 ### 3. DTI and struct+fMRI matching
 
 # a dir to put DTI and struct+fMRI
-mkdir control_final
+mkdir $preHSAM/control_final
 # define a function to help us matching
 matching () {
 	if [ $1 == $2 ];
